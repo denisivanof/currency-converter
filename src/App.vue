@@ -1,28 +1,52 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar
+        app
+        color="deep-purple accent-4"
+        dense
+        dark
+    >
+      <nav class="d-flex justify-center" style="width: 100%">
+        <router-link
+            class="pr-16 text-decoration-none text-h6 white--text d-flex align-center"
+            to="/"
+        >
+          <v-icon>mdi-currency-usd</v-icon>
+          Currency Converter
+        </router-link>
+        <router-link
+            class="text-decoration-none text-h6 white--text d-flex align-center"
+            to="/exchange-rates"
+        >
+          <v-icon class="pr-1">mdi-chart-line</v-icon>
+          Exchange Rates
+        </router-link>
+      </nav>
+    </v-app-bar>
+    <v-main>
+      <v-container>
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {mapActions} from "vuex";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data: () => ({
+  }),
+  created() {
+    this.getSupportedCodesAction()
+  },
+  methods:{
+    ...mapActions([
+        'getSupportedCodesAction'
+    ])
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+
 </style>
